@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SmartVolt Monitor</title>
+    <title>Smart Monitor</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -15,6 +15,7 @@
   </head>
 
   <body class="bg-gray-100 flex flex-col justify-center items-center h-screen">
+    <h1 class="text-3xl font-bold text-center mb-6">ระบบตรวจจับไฟรั่วอัจฉริยะสำหรับตู้กดน้ำ</h1>
     <h1 class="text-2xl font-bold text-center mb-6">สถานะอุปกรณ์</h1>
 
     <div id="device-info" class="flex flex-wrap gap-6 w-full max-w-6xl p-6">
@@ -79,6 +80,8 @@
             const isOnline = timeDifference <= 60; // สถานะออนไลน์ถ้าอัพเดตใน 60 วินาที
 
             const isLeakage = device.Data.leakageCurrent ? "ไฟฟ้ารั่ว" : "ปกติ";
+            const voltage = device.Data.Voltage || "0"; // ใช้ค่า voltage ถ้ามี
+            const current = device.Data.Current || "0"; // ใช้ค่า voltage ถ้ามี
 
             // สร้าง HTML สำหรับแต่ละการ์ด
             cardHtml += `
@@ -114,6 +117,20 @@
                     <i class="${
                       isOnline ? "fas fa-check-circle" : "fas fa-times-circle"
                     }"></i> ${isOnline ? "Online" : "Offline"}
+                  </span>
+                </p>
+                <p class="mt-2">แรงดันไฟฟ้า: 
+                  <span class="font-medium ${
+                    voltage === "0" ? "text-gray-600" : "text-blue-600"
+                  }">
+                    <i class="fas fa-bolt"></i> ${voltage} V
+                  </span>
+                </p>
+                <p class="mt-2">กระแสไฟฟ้า: 
+                  <span class="font-medium ${
+                    current === "0" ? "text-gray-600" : "text-blue-600"
+                  }">
+                    <i class="fas fa-bolt"></i> ${current} A
                   </span>
                 </p>
               </div>
