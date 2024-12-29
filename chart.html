@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="sharpLineChart"></canvas>
+<script>
+const ctxSharp = document.getElementById('sharpLineChart').getContext('2d');
+new Chart(ctxSharp, {
+    type: 'line',
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        datasets: [{
+            label: 'Sales',
+            data: [65, 59, 80, 81, 56, 55],
+            fill: false, // ไม่เติมสีด้านล่างกราฟ
+            borderColor: 'rgb(75, 192, 192)', // สีเส้นกราฟ
+            tension: 0 // ค่านี้กำหนดความโค้ง ให้เป็น 0 เพื่อเส้นตรงมุมแหลม
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>

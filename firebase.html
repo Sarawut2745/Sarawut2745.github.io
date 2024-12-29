@@ -1,0 +1,62 @@
+
+// HTML ตัวอย่างเพื่อแสดงข้อมูล
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>API Data</title>
+  <script src="script.js"></script>
+  <script>
+    // ดึงข้อมูลจาก API โดยใช้ Fetch API
+
+const apiURL = "https://esp32-f1440-default-rtdb.asia-southeast1.firebasedatabase.app/Devices.json";
+
+// ฟังก์ชันสำหรับดึงข้อมูลจาก API
+async function fetchData() {
+  try {
+    const response = await fetch(apiURL);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+
+    if (data && data.Smart_Monitor_001) {
+      const deviceData = data.Smart_Monitor_001.Data;
+      const deviceID = data.Smart_Monitor_001.ID;
+
+      // แสดงข้อมูลใน console หรือ DOM
+      console.log("Current:", deviceData.Current);
+      console.log("Date:", deviceData.Date);
+      console.log("Time:", deviceData.Time);
+      console.log("Voltage:", deviceData.Voltage);
+      console.log("Leakage Current:", deviceData.leakageCurrent);
+      console.log("ID:", deviceID);
+
+      // แสดงผลใน HTML (กรณีที่ต้องการแสดงในหน้าเว็บ)
+      document.getElementById('current').innerText = `Current: ${deviceData.Current} A`;
+      document.getElementById('date').innerText = `Date: ${deviceData.Date}`;
+      document.getElementById('time').innerText = `Time: ${deviceData.Time}`;
+      document.getElementById('voltage').innerText = `Voltage: ${deviceData.Voltage} V`;
+      document.getElementById('leakageCurrent').innerText = `Leakage Current: ${deviceData.leakageCurrent} A`;
+      document.getElementById('id').innerText = `ID: ${deviceID}`;
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
+// เรียกใช้ฟังก์ชัน fetchData
+fetchData();
+
+  </script>
+</head>
+<body>
+  <h1>Device Data</h1>
+  <p id="current"></p>
+  <p id="date"></p>
+  <p id="time"></p>
+  <p id="voltage"></p>
+  <p id="leakageCurrent"></p>
+  <p id="id"></p>
+</body>
+</html>

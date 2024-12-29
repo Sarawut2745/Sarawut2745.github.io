@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าแสดงการทำงานของระบบ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="time.js"></script>
+    <script src="chart_copy.js"></script>
+    <script src="fetch_api.js"></script>
+    <script src="changeText.js"></script>
+    <script src="alertBox.js"></script>
+    <script>
+        fetchData();
+    </script>
+</head>
+
+<body class="bg-gray-900">
+    <header>
+        <nav class="border-gray-200 bg-gray-800">
+            <div class="flex flex-wrap justify-between items-center mx-auto p-4">
+                <!-- Logo and Text -->
+                <div class="flex flex-row items-center space-x-4">
+                    <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
+                        <img src="https://rms.spvc.ac.th/files/89237_21022717170326.png" class="h-12"
+                            alt="Flowbite Logo" />
+                        <span
+                            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ระบบตรวจจับไฟรั่วอัจฉริยะ</span>
+                    </a>
+                </div>
+
+                <!-- Admin Section -->
+                <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-6 w-6 text-gray-500 dark:text-white">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                    <span class="text-lg text-gray-500 dark:text-white hover:underline">ผู้ดูแลระบบ</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="grid lg:grid-cols-2 md:grid-cols-1 p-10 gap-8 mt-auto">
+        <section class="space-y-10 mt-10">
+
+            <article>
+                <h2 class="text-2xl font-bold text-white mb-3" id="date-text"></h2>
+                <div class="bg-gray-800 rounded-lg shadow-md p-6 text-white">
+                    <h1 class="text-4xl font-semibold">เวลาตอนนี้</h1>
+                    <p id="time-display" class="text-7xl font-mono text-center"></p>
+                </div>
+            </article>
+
+            <article id="alert_message"
+                class="bg-gray-800 text-white shadow-lg rounded-lg p-6 w-80 w-full max-h-80 overflow-y-auto">
+                <h2 class="text-2xl font-bold mb-4">ข้อความแจ้งเตือน</h2>
+                <div class="bg-gray-700 text-white flex flex-col space-y-3 p-4 rounded-lg shadow-lg" id="notification-none">
+                    <h4 class="text-lg font-semibold text-yellow-400 flex items-center space-x-2">
+                      <span>⚠️</span>
+                      <span>ไม่มีการแจ้งเตือนในขณะนี้</span>
+                    </h4>
+                  </div>    
+            </article>
+        </section>
+
+        <section class="space-y-10 mt-20">
+            <article>
+                <div class="flex flex-row justify-between">
+                    <h2 class="text-2xl font-bold text-white">ชื่ออุปกรณ์ : <span id="device_name"></span></h2>
+                    <h2 class="text-2xl font-bold text-white mb-3" id="status_device">สถานะ : <span class="text-gray-500">รอการตรวจสอบ...</span></h2>
+                </div>
+                <div class="bg-gray-800 rounded-lg shadow-md p-6 text-white flex flex-col">
+                    <h1 class="text-4xl font-semibold mb-3">สถานะเซ็นเซอร์และอุปกรณ์ตรวจจับ</h1>
+                    <span id="voltageDeviceStatus">อุปกรณ์ตรวจจับแรงดันไฟฟ้า : <span id="voltageStatus" class="text-gray-500">รอการตรวจสอบ...</span></span>
+                    <span id="currentDeviceStatus">อุปกรณ์ตรวจจับกระแสไฟฟ้า : <span id="currentStatus" class="text-gray-500">รอการตรวจสอบ...</span></span>
+                    <span id="aiCameraDeviceStatus">กล้อง AI (Object Detection) : <span id="aiStatus" class="text-gray-500">รอการตรวจสอบ...</span></span>                    
+                    <p id="time-display" class="text-7xl font-mono text-gray-900 text-center"></p>
+                </div>
+            </article>
+
+            <article class="grid lg:grid-cols-2 md:grid-cols-1 max-h-80 ">
+                <article>
+                    <div class="bg-gray-800 p-6 text-white">
+                        <h1 class="text-2xl font-semibold">แรงดันไฟฟ้า (Voltage)</h1>
+                        <canvas id="sharpLineChart"></canvas>
+                    </div>
+                </article>
+
+                <article>
+                    <div class="bg-gray-800 p-6 text-white">
+                        <h1 class="text-2xl font-semibold">กระแสไฟฟ้า (Electric Current)</h1>
+                        <canvas id="sharpLineChart2"></canvas>
+                    </div>
+                </article>
+            </article>
+
+
+        </section>
+    </main>
+    <footer class="bg-gray-800 text-white py-3 fixed bottom-0 w-full">
+        <div class="container mx-auto text-center">
+            <h2 class="text-xl font-medium">
+                เป็นส่วนหนึ่งของผลงานสิ่งประดิษฐ์ประเภทที่ 2 ประจำปี 2567 ระบบตรวจจับไฟรั่วอัจฉริยะสำหรับตู้กดน้ำ
+                วิทยาลัยอาชีวศึกษาสุพรรณบุรี Create by KK.
+            </h2>
+            <div class="mt-4 text-sm">
+                <span>© 2024 วิทยาลัยอาชีวศึกษาสุพรรณบุรี | สงวนลิขสิทธิ์</span>
+            </div>
+        </div>
+    </footer>
+    <script>
+
+        // อัปเดตเวลาแบบเรียลไทม์ทุกวินาที
+        setInterval(updateTime, 1000);
+        setInterval(createSharp, 2000);
+        setInterval(createSharp2, 10000);
+        setInterval(checkDeviceStatus, 12000);
+
+        // เรียกครั้งแรกเพื่อแสดงเวลาเมื่อโหลดหน้า
+        displayDate();
+        updateTime();
+        createSharp();
+        createSharp2();
+    </script>
+</body>
+
+</html>

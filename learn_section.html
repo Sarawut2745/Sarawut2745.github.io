@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เว็บไซต์ตัวอย่าง</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    header, nav, main, section, article, aside, footer {
+      margin: 10px;
+      padding: 15px;
+      border: 1px solid #ddd;
+    }
+    header {
+      background: #f4f4f4;
+    }
+    nav {
+      background: #333;
+      color: white;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+    main {
+      display: flex;
+    }
+    section {
+      flex: 3;
+    }
+    aside {
+      flex: 1;
+      background: #f9f9f9;
+    }
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- ส่วนหัวของเว็บไซต์ -->
+  <header>
+    <h1>ยินดีต้อนรับสู่เว็บไซต์ตัวอย่าง</h1>
+    <p>นี่คือเว็บไซต์ตัวอย่างสำหรับการเรียนรู้ HTML5 semantic elements</p>
+  </header>
+
+  <!-- เมนูนำทาง -->
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- เนื้อหาหลัก -->
+  <main>
+    <!-- Section เนื้อหา -->
+    <section id="home">
+      <h2>เกี่ยวกับเรา</h2>
+      <p>เราคือเว็บไซต์ที่มุ่งเน้นให้ความรู้เกี่ยวกับเทคโนโลยีและการพัฒนาเว็บ</p>
+    </section>
+
+    <!-- ส่วนบทความ -->
+    <section id="articles">
+      <h2>บทความล่าสุด</h2>
+      <!-- บทความที่ 1 -->
+      <article>
+        <h3>HTML5 คืออะไร?</h3>
+        <p>HTML5 เป็นเวอร์ชันล่าสุดของ HTML ที่เพิ่มฟีเจอร์ใหม่ ๆ เช่น semantic elements...</p>
+      </article>
+      <!-- บทความที่ 2 -->
+      <article>
+        <h3>CSS คืออะไร?</h3>
+        <p>CSS ใช้สำหรับการตกแต่งและปรับแต่งหน้าตาเว็บไซต์...</p>
+      </article>
+    </section>
+
+    <!-- Sidebar เนื้อหาเสริม -->
+    <aside>
+      <h3>ข่าวสารและโปรโมชั่น</h3>
+      <p>สมัครสมาชิกวันนี้ รับส่วนลดพิเศษ!</p>
+    </aside>
+  </main>
+
+  <!-- ส่วนท้ายของเว็บไซต์ -->
+  <footer>
+    <p>© 2024 เว็บไซต์ตัวอย่าง. สงวนลิขสิทธิ์.</p>
+    <p><a href="#contact" style="color: white;">ติดต่อเรา</a></p>
+  </footer>
+</body>
+</html>
